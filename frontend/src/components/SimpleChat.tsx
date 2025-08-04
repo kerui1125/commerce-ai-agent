@@ -214,7 +214,7 @@ export default function SimpleChat() {
                                                         content: item => (
                                                             <SpaceBetween size="s">
                                                                 <img
-                                                                    src={item.image}
+                                                                    src={`${window.location.protocol}//${window.location.hostname}:8000/api/proxy-image?url=${encodeURIComponent(item.image)}`}
                                                                     alt={item.title}
                                                                     style={{
                                                                         width: '100%',
