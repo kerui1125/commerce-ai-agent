@@ -4,19 +4,17 @@ FastAPI backend service for the Commerce AI Agent that provides conversational A
 
 ## Features
 
-- **General Conversation**: Chat with the AI assistant
-- **Text-based Product Recommendation**: Get product suggestions from text queries
-- **Image-based Product Search**: Upload images to find similar products
-- **Local Product Data**: Fast product lookup with pre-generated tags
-- **OpenAI Integration**: Powered by GPT-4 for intelligent responses
+- General Conversation: Chat with the AI assistant
+- Text-based Product Recommendation: Get product suggestions from text queries
+- Image-based Product Search: Upload images to find similar products
+- Local Product Data: Fast product lookup with pre-generated tags
+- OpenAI Integration: Powered by GPT-4o for intelligent responses
 
 ## Tech Stack
 
-- **FastAPI**: Modern Python web framework
-- **OpenAI API**: For AI conversations and image analysis
-- **Pydantic**: Data validation and serialization
-- **Uvicorn**: ASGI server
-- **Docker**: Containerization
+- FastAPI: Modern Python web framework  
+- OpenAI API: For AI conversations and image analysis
+- Pydantic: Data validation and serialization
 
 ## API Endpoints
 
@@ -67,6 +65,9 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 ### Local Development
 ```bash
+# activate virtual env
+source venv/bin/activate
+
 # Install dependencies
 pip install -r requirements.txt
 
@@ -74,19 +75,10 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### Docker
-```bash
-# Build image
-docker build -t commerce-ai-backend .
-
-# Run container
-docker run -p 8000:8000 --env-file .env commerce-ai-backend
-```
-
 ## Data
 
 The application uses local product data stored in `app/data/products.json` for fast performance. This data includes:
-- Product information from Fake Store API
+- Product information from Fake Store API: https://fakestoreapi.com/products
 - AI-generated tags for each product
 - Pre-processed data for quick search
 
@@ -111,13 +103,12 @@ backend/
 
 Suitable for deployment on:
 - AWS EC2 (t2.micro or larger)
-- Google Cloud Run
-- Azure Container Instances
-- Any Docker-compatible platform
+- Railway, Render, Heroku
+- Any Python hosting platform
 
 ## Performance
 
-- **Local data storage** for fast product lookup
-- **Async operations** for concurrent request handling
-- **Caching** of product data in memory
-- **Health checks** for monitoring
+- Local data storage for fast product lookup
+- Async operations for concurrent request handling
+- Caching of product data in memory
+- Health checks for monitoring

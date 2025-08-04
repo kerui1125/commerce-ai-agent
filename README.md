@@ -2,33 +2,22 @@
 
 A full-stack AI-powered conversational agent for e-commerce product recommendations and search. Built with React TypeScript frontend and FastAPI Python backend.
 
-## 🚀 Live Demo
+## Live Demo
 
-[Add your deployed URL here]
+**Frontend**: http://ec2-54-203-168-238.us-west-2.compute.amazonaws.com:3000  
+**Backend API**: http://ec2-54-203-168-238.us-west-2.compute.amazonaws.com:8000  
+**API Documentation**: http://ec2-54-203-168-238.us-west-2.compute.amazonaws.com:8000/docs
 
-## ✨ Features
+## Features
 
-- **💬 General Conversation**: Chat naturally with the AI assistant
-- **🔍 Text-based Product Search**: Get recommendations from text queries like "I need a sports t-shirt"
-- **📸 Image-based Product Search**: Upload images to find similar products
-- **📱 Responsive Design**: Works perfectly on desktop, tablet, and mobile
-- **⚡ Real-time Chat**: Auto-scrolling chat interface with loading states
-- **🎨 Professional UI**: Built with AWS Cloudscape Design System
+- **General Conversation**: Chat naturally with the AI assistant
+- **Text-based Product Search**: Get recommendations from text queries like "I need a sports t-shirt"
+- **Image-based Product Search**: Upload images to find similar products
+- **Responsive Design**: Works perfectly on desktop, tablet, and mobile
+- **Real-time Chat**: Auto-scrolling chat interface with loading states
+- **Professional UI**: Built with AWS Cloudscape Design System
 
-## 🏗️ Architecture
-
-```
-┌─────────────────┐    HTTP/REST    ┌─────────────────┐
-│   React Frontend │ ◄──────────────► │  FastAPI Backend │
-│                 │                 │                 │
-│ • Chat Interface│                 │ • OpenAI API    │
-│ • Image Upload  │                 │ • Product Search│
-│ • Product Cards │                 │ • Local Data    │
-└─────────────────┘                 └─────────────────┘
-```
-
-## 🛠️ Tech Stack
-
+## Architecture
 ### Frontend
 - **React 18** with TypeScript
 - **AWS Cloudscape** Design System
@@ -37,12 +26,11 @@ A full-stack AI-powered conversational agent for e-commerce product recommendati
 
 ### Backend
 - **FastAPI** with Python 3.11
-- **OpenAI GPT-4** for conversations
-- **OpenAI Vision API** for image analysis
+- **OpenAI GPT-4o** for conversations and image analysis
 - **Pydantic** for data validation
 - **Local JSON data** for fast product lookup
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.11+
@@ -51,7 +39,7 @@ A full-stack AI-powered conversational agent for e-commerce product recommendati
 
 ### 1. Clone & Setup
 ```bash
-git clone <your-repo>
+git clone https://github.com/kerui1125/commerce-ai-agent.git
 cd commerce-ai-agent
 
 # Setup backend
@@ -80,7 +68,7 @@ npm start
 - **Backend API**: http://localhost:8000
 - **API Docs**: http://localhost:8000/docs
 
-## 🔧 Development Setup
+## Development Setup
 
 ### Local Development
 ```bash
@@ -97,7 +85,7 @@ npm install
 npm start
 ```
 
-## 📡 API Usage
+## API Usage
 
 ### Chat Endpoint
 ```bash
@@ -129,7 +117,7 @@ curl -X POST "http://localhost:8000/api/chat" \
 }
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### AWS EC2 Deployment
 1. **Launch EC2 instance** (t2.micro or larger)
@@ -164,7 +152,7 @@ npx serve -s build -l 3000
 - **Backend**: Railway, Render, Heroku
 - **Full Stack**: DigitalOcean App Platform
 
-## 📊 Performance
+## Performance
 
 - **Local product data** for sub-100ms search responses
 - **Async operations** for handling concurrent users
@@ -172,7 +160,7 @@ npx serve -s build -l 3000
 - **Static asset serving** with serve
 - **Process management** with PM2
 
-## 🔒 Security
+## Security
 
 - **Environment variables** for sensitive data
 - **CORS configuration** for cross-origin requests
@@ -180,7 +168,7 @@ npx serve -s build -l 3000
 - **Process isolation** with PM2
 - **Secure deployment** practices
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 commerce-ai-agent/
@@ -200,7 +188,7 @@ commerce-ai-agent/
 └── README.md
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -208,11 +196,11 @@ commerce-ai-agent/
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📄 License
+## License
 
 MIT License - see LICENSE file for details
 
-## 🆘 Support
+## Support
 
 - **Issues**: Create a GitHub issue
 - **Documentation**: Check individual README files in backend/ and frontend/
@@ -220,4 +208,4 @@ MIT License - see LICENSE file for details
 
 ---
 
-Built with ❤️ for modern e-commerce experiences
+Built for modern e-commerce experiences
