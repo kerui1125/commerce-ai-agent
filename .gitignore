@@ -29,7 +29,6 @@ ENV/
 
 # Environment variables
 .env
-backend/.env
 .env.local
 .env.development.local
 .env.test.local
@@ -90,8 +89,4 @@ jspm_packages/
 *.tgz
 
 # Yarn Integrity file
-.yarn-integritybackend/.env
-.env
-backend/.env
-.env
-*.env
+.yarn-integrity

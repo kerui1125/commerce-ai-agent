@@ -20,8 +20,6 @@ sudo yum install -y python3 python3-pip
 echo "Installing PM2..."
 sudo npm install -g pm2
 
-# Clone the repository
-git clone https://github.com/kerui1125/commerce-ai-agent.git
 cd commerce-ai-agent
 
 # Setup backend
