@@ -4,18 +4,25 @@ A full-stack AI-powered conversational agent for e-commerce product recommendati
 
 ## Live Demo
 
-**Frontend**: http://ec2-54-203-168-238.us-west-2.compute.amazonaws.com:3000  
-**Backend API**: http://ec2-54-203-168-238.us-west-2.compute.amazonaws.com:8000  
-**API Documentation**: http://ec2-54-203-168-238.us-west-2.compute.amazonaws.com:8000/docs
+**Frontend**: http://54.203.168.238:3000/
+**Backend API**: http://54.203.168.238:8000/
+**API Documentation**: http://54.203.168.238:8000/docs#/
 
 ## Features
 
 - **General Conversation**: Chat naturally with the AI assistant
+![alt text](image.png)
 - **Text-based Product Search**: Get recommendations from text queries like "I need a sports t-shirt"
+![alt text](image-1.png)
 - **Image-based Product Search**: Upload images to find similar products
+![alt text](image-2.png)
 - **Responsive Design**: Works perfectly on desktop, tablet, and mobile
 - **Real-time Chat**: Auto-scrolling chat interface with loading states
 - **Professional UI**: Built with AWS Cloudscape Design System
+
+## Beyond the scope
+- **Image Hosting**: Product images from fakestoreapi.com may not load on EC2 due to CORS/Cloudflare restrictions.
+- **Static Catalog**: Uses a dummy product source (https://fakestoreapi.com/products); no dynamic inventory.
 
 ## Architecture
 ### Frontend
@@ -37,46 +44,24 @@ A full-stack AI-powered conversational agent for e-commerce product recommendati
 - Node.js 18+
 - OpenAI API key
 
-### 1. Clone & Setup
-```bash
-git clone https://github.com/kerui1125/commerce-ai-agent.git
-cd commerce-ai-agent
-
-# Setup backend
-cd backend
-pip install -r requirements.txt
-echo "OPENAI_API_KEY=your_key_here" > .env
-
-# Setup frontend
-cd ../frontend
-npm install
-```
-
-### 2. Run the Application
-```bash
-# Terminal 1: Start backend
-cd backend
-uvicorn app.main:app --reload
-
-# Terminal 2: Start frontend  
-cd frontend
-npm start
-```
-
 ### 3. Access the Application
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8000
 - **API Docs**: http://localhost:8000/docs
 
 ## Development Setup
-
 ### Local Development
 ```bash
 # Backend
+git clone https://github.com/kerui1125/commerce-ai-agent.git
+cd commerce-ai-agent
+
 cd backend
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
+touch /backend/.env
+echo "OPENAI_API_KEY=<your_key_here>" > .env
 uvicorn app.main:app --reload
 
 # Frontend (in another terminal)
@@ -84,6 +69,18 @@ cd frontend
 npm install
 npm start
 ```
+### AWS EC2 Developoment
+```bash
+git clone https://github.com/kerui1125/commerce-ai-agent.git
+cd commerce-ai-agent
+ls -la frontend/build/ # ec2 t2.micro has limit memory, so React app used optimized build solution to speed up the deployment
+chmod +x simple-deploy.sh
+./simple-deploy.sh
+```
+### Other Deployment Options
+- **Frontend**: Netlify, Vercel (just upload the build folder)
+- **Backend**: Railway, Render, Heroku
+- **Full Stack**: DigitalOcean App Platform
 
 ## API Usage
 
@@ -117,41 +114,6 @@ curl -X POST "http://localhost:8000/api/chat" \
 }
 ```
 
-## Deployment
-
-### AWS EC2 Deployment
-1. **Launch EC2 instance** (t2.micro or larger)
-2. **Upload your code** to the instance
-3. **Run the deployment script**:
-   ```bash
-   chmod +x simple-deploy.sh
-   ./simple-deploy.sh
-   ```
-
-### Manual EC2 Setup
-```bash
-# Install dependencies
-sudo yum update -y
-sudo yum install python3 python3-pip nodejs npm -y
-
-# Setup backend
-cd backend
-pip3 install -r requirements.txt
-export OPENAI_API_KEY=your_key
-nohup uvicorn app.main:app --host 0.0.0.0 --port 8000 &
-
-# Setup frontend
-cd ../frontend
-npm install
-npm run build
-npx serve -s build -l 3000
-```
-
-### Other Deployment Options
-- **Frontend**: Netlify, Vercel (just upload the build folder)
-- **Backend**: Railway, Render, Heroku
-- **Full Stack**: DigitalOcean App Platform
-
 ## Performance
 
 - **Local product data** for sub-100ms search responses
@@ -166,7 +128,6 @@ npx serve -s build -l 3000
 - **CORS configuration** for cross-origin requests
 - **Input validation** with Pydantic
 - **Process isolation** with PM2
-- **Secure deployment** practices
 
 ## Project Structure
 
@@ -187,25 +148,5 @@ commerce-ai-agent/
 ├── simple-deploy.sh               # EC2 deployment script
 └── README.md
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## License
-
-MIT License - see LICENSE file for details
-
-## Support
-
-- **Issues**: Create a GitHub issue
-- **Documentation**: Check individual README files in backend/ and frontend/
-- **API Docs**: Visit http://localhost:8000/docs when running locally
-
 ---
-
 Built for modern e-commerce experiences
