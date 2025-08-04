@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Commerce AI Agent EC2 Deployment Script
+# Commerce AI Agent EC2 Deployment Script - Lightweight Version
 echo "Starting Commerce AI Agent deployment..."
 
 # Update system packages
@@ -20,6 +20,13 @@ sudo yum install -y python3 python3-pip
 echo "Installing PM2..."
 sudo npm install -g pm2
 
+# Install serve for static files
+echo "Installing serve..."
+sudo npm install -g serve
+
+# Clone the repository
+echo "Cloning repository..."
+git clone https://github.com/kerui1125/commerce-ai-agent.git
 cd commerce-ai-agent
 
 # Setup backend
@@ -40,20 +47,19 @@ else
     pm2 start "uvicorn app.main:app --host 0.0.0.0 --port 8000" --name backend
 fi
 
-# Setup frontend
+# Setup frontend - NO npm install, just serve pre-built files
 echo "Setting up frontend..."
 cd ../frontend
 
-# Install dependencies with error handling
-echo "Installing frontend dependencies..."
-npm install --production
-
-# Build with error handling
-echo "Building frontend..."
-if npm run build; then
-    echo "Frontend build successful"
+# Check if build directory exists (should be pre-built and committed)
+if [ -d "build" ]; then
+    echo "Found pre-built frontend files"
+    echo "Build directory contains $(ls build/ | wc -l) files"
 else
-    echo "Frontend build failed, exiting..."
+    echo "ERROR: No build directory found!"
+    echo "Please build locally first:"
+    echo "  cd frontend && npm run build"
+    echo "Then commit and push the build files"
     exit 1
 fi
 
@@ -63,7 +69,7 @@ if pm2 list | grep -q "frontend.*online"; then
     pm2 restart frontend
 else
     echo "Starting frontend service..."
-    pm2 start "npx serve -s build -l 3000" --name frontend
+    pm2 start "serve -s build -l 3000" --name frontend
 fi
 
 # Save PM2 configuration

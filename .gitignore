@@ -4,7 +4,6 @@ __pycache__/
 *$py.class
 *.so
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
@@ -42,8 +41,6 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # React build
-frontend/build/
-/build
 /dist
 
 # IDE
