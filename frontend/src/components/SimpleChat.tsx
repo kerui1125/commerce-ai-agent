@@ -80,8 +80,9 @@ export default function SimpleChat() {
                 });
             }
 
-            // Call your backend API
-            const response = await axios.post('http://localhost:8000/api/chat', {
+            // Call your backend API - use current server's IP
+            const apiUrl = `${window.location.protocol}//${window.location.hostname}:8000/api/chat`;
+            const response = await axios.post(apiUrl, {
                 message: message,
                 type: chatType,
                 image: imageData
@@ -153,7 +154,7 @@ export default function SimpleChat() {
             <Container header={<Header>Commerce AI Agent</Header>}>
                 <div style={contentStyle}>
                     {/* Chat Type Selector - FIXED AT TOP */}
-                    <div style={{ 
+                    <div style={{
                         marginBottom: '16px',
                         position: 'relative',
                         zIndex: 1000,
@@ -259,7 +260,7 @@ export default function SimpleChat() {
 
                     {/* File Upload for Image Search - FIXED */}
                     {chatType === 'product_search_image' && (
-                        <div style={{ 
+                        <div style={{
                             marginBottom: '16px',
                             flexShrink: 0
                         }}>

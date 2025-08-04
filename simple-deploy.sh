@@ -24,19 +24,21 @@ sudo npm install -g pm2
 echo "Installing serve..."
 sudo npm install -g serve
 
-# Clone the repository
-echo "Cloning repository..."
-git clone https://github.com/kerui1125/commerce-ai-agent.git
-cd commerce-ai-agent
-
 # Setup backend
 echo "Setting up backend..."
 cd backend
 pip3 install -r requirements.txt
 
-# Get OpenAI API key from user
-read -p "Enter your OpenAI API key: " OPENAI_API_KEY
-echo "OPENAI_API_KEY=$OPENAI_API_KEY" > .env
+# Check for .env file
+if [ -f ".env" ]; then
+    echo "Found .env file"
+    read -p "Enter your OpenAI API key: " OPENAI_API_KEY
+    echo "OPENAI_API_KEY=$OPENAI_API_KEY" > .env
+else
+    echo "No .env file found, creating one..."
+    read -p "Enter your OpenAI API key: " OPENAI_API_KEY
+    echo "OPENAI_API_KEY=$OPENAI_API_KEY" > .env
+fi
 
 # Check if backend is already running
 if pm2 list | grep -q "backend.*online"; then
@@ -66,10 +68,11 @@ fi
 # Check if frontend is already running
 if pm2 list | grep -q "frontend.*online"; then
     echo "Frontend already running, restarting..."
-    pm2 restart frontend
+    pm2 delete frontend
+    pm2 start "serve -s build -l 3000" --name frontend --cwd $(pwd)
 else
     echo "Starting frontend service..."
-    pm2 start "serve -s build -l 3000" --name frontend
+    pm2 start "serve -s build -l 3000" --name frontend --cwd $(pwd)
 fi
 
 # Save PM2 configuration
